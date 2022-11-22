@@ -42,7 +42,6 @@ if (torrent_list.length){
 
     ids = ids.sort(function (a, b) {  return a - b;  });
 
-    console.log(ids);
 
     var missing_ids = findMissing(ids);
 
@@ -55,9 +54,6 @@ if (torrent_list.length){
             return response.text()
         })
         .then(text => {
-            // var new_show = document.createElement("tr");
-            // new_show.classList.add("warning")
-
             var cat = text.split('- <a href="/?c=')[1].split('">')[0].trim()
             var cat_text = text.split(cat + '">')[1].split('</a>')[0].trim()
 
@@ -148,6 +144,12 @@ if (torrent_list.length){
             
 
             var time = text.split('Date:</div>')[1].split('">')[1].split(' UTC</div>')[0].trim()
+            time = new Date(time + ' UTC');
+
+            hour = time.getHours();
+            mins = time.getMinutes();
+
+            time = time.toLocaleDateString() + " " + hour + ":" + mins
 
             var time_cell = document.createElement('td');
             time_cell.classList.add('text-center');
@@ -186,10 +188,7 @@ if (torrent_list.length){
 
             completed_cell.appendChild(completed_cell_text);
 
-
-            console.log(torrent_table.lenght);
-
-            var row = torrent_table.insertRow(miss["index"]);
+            var row = torrent_table.insertRow(ids.length -  miss["index"]);
             row.classList.add("warning")
 
             row.appendChild(cat_cell);
