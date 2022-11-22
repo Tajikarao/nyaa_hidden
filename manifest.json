@@ -1,0 +1,16 @@
+{
+    "manifest_version": 3,
+   
+    "name": "Nyaa Hidden",
+    "version": "0.1.0",
+    "description": "Show hidden release",
+   
+    "content_scripts": [{
+      "css": ["styles.css"],
+      "js": ["content.js"],
+      "matches": [
+        "https://nyaa.si/*"
+        ]
+    }]
+   
+  }
